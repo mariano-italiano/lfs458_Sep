@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: python-deploy
+  name: python-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-deploy
+  template:
+    metadata:
+      labels:
+        app: python-deploy
+    spec:
+      containers:
+      - image: marcinkujawski/python-api:1.0
+        name: python-app

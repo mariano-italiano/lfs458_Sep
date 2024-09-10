@@ -178,3 +178,294 @@ git add .
 git status
 history
 history | awk '$1 > 126' | cut -c 8- >> day2-history.txt
+vi ~/.kube/config 
+grep client-cert ~/.kube/config | cut -d " " -f 6
+grep client-cert ~/.kube/config | cut -d " " -f 6 | base64 -d 
+grep client-cert ~/.kube/config | cut -d " " -f 6 | base64 -d > client.pem
+grep client-key ~/.kube/config | cut -d " " -f 6 | base64 -d 
+grep client-key ~/.kube/config | cut -d " " -f 6 | base64 -d > client.key
+grep certificate-authority ~/.kube/config | cut -d " " -f 6 | base64 -d 
+grep certificate-authority ~/.kube/config | cut -d " " -f 6 | base64 -d > ca.pem
+ls -la
+curl --cert client.pem --key client.key --cacert ca.pem https://192.168.1.100:6443/api/v1/nodes
+curl --cert client.pem --key client.key --cacert ca.pem https://192.168.1.100:6443/api/v1/nodes | jq -r '.items[].metadata.name'
+sudo apt  install jq -y
+curl --cert client.pem --key client.key --cacert ca.pem https://192.168.1.100:6443/api/v1/nodes | jq -r '.items[].metadata.name'
+kubectl get nodes
+kubectl get nodes --v=6
+kubectl get nodes --v=9
+openssl genrsa -out devops.key
+cat devops.key
+openssl req -new -key devops.key -out devops.csr -subj "/CN=devops"
+cat devops.csr 
+cat devops.csr | base64 | tr -d '\n'
+vi user-request-devops.yaml
+kubectl apply -f user-request-devops.yaml
+kubectl get certificatesigningrequests.certificates.k8s.io 
+kubectl certificate approve user-request-devops
+kubectl get certificatesigningrequests.certificates.k8s.io 
+kubectl get certificatesigningrequests.certificates.k8s.io user-request-devops 
+kubectl get certificatesigningrequests.certificates.k8s.io user-request-devops -o yaml
+echo "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCakNDQWU2Z0F3SUJBZ0lRZjVOSGhIdTNlZzlaTTZGc0VnTmZZREFOQmdrcWhraUc5dzBCQVFzRkFEQVYKTVJNd0VRWURWUVFERXdwcmRXSmxjbTVsZEdWek1CNFhEVEkwTURreE1EQTNNall3TWxvWERUSTFNRGt4TURBMwpNall3TWxvd0VURVBNQTBHQTFVRUF4TUdaR1YyYjNCek1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBCk1JSUJDZ0tDQVFFQXhrcEEyakpka24wU3RsT3g1R2o2YThORVlyc0M5Nzl2c05WdmFHMkQwbG5tK0NCRU5ISjQKcGxIQ2w2R1Y5R2FIcTdPWWkwVDhtT0FHOSs5cEZtSDBGellsOWNiWXo0TmZORUxwUkMwNnRpSWc4THZCdWZheApRWFhTQis2VG9aVVlmblg1MFJKY21iajBNN2FNQnRXUzE5SUpTb1laS1R1b0Q2b0o0dmxZVFBlMWowdHZoc29xCnoyT0FNMWFpYldyRSs2ZklyRUhHYXUxZ1ZMTXVsTXRIR0ZBYUVabFpFVGt1LzhQK1lCaU96Q003emMrL3V3dWUKQ3VsUzY3ZXlVSVpzM0dnendxTXU3QWU3UHZTWmxqN0d0L3BtdlpnaHhYL2lsRnVsenRxK1BQWVc4dWc1YUNCbAp1YUxNS2gzZU5uZUtyRHhpZytoSk9GdXp5Nk5ISi9kenN3SURBUUFCbzFZd1ZEQU9CZ05WSFE4QkFmOEVCQU1DCkJhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQWZCZ05WSFNNRUdEQVcKZ0JRejc4YkswM0h0WmhESW1tU09zbWRCVTB3a1N6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFsMThlQXQvbQo3WHptZjZ0TlVGNDFjVkxtTmFPVk5MMnhDL0lKb3hoNEtCS1Zyc2FNYzlhUXBRbkFUb2JqNzVUQ0VnZTRkZVZiClhMM2NMeC9QUWY2U1lSamowa25BK3N0K0FyOFhrcmt2SUxCR1hEQ3NOL2hoc05MZHdGaUF4S09DRDkxTWFLa0sKZ3F0S3RjTVA1RWtoa3EvZ09BRkhQd3Z1NEdWWkpZL1NaaExxTWFkNHdmSFB6Z0FsSXREcTArZmI4Z3FHYzVkQgpwWnM4ZzJiNDdDa3ZVNWJLYjZNY1dra2hMTzdCa2E1V1pVM1hUTnVWbTQxdmRnclk1SWRsNHdDQU1RL1BQU2ZaCkVicDJZRUM4Z2l5czRPS3lxd01UUGdLNVFYb1RyTGRlV2U2TmEzZ1VsRlR1VnZYcXZuN0V5dStncmhpMENTZTAKbEdSdDJTZGNGRjRhdUE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==" | base64 -d 
+echo "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCakNDQWU2Z0F3SUJBZ0lRZjVOSGhIdTNlZzlaTTZGc0VnTmZZREFOQmdrcWhraUc5dzBCQVFzRkFEQVYKTVJNd0VRWURWUVFERXdwcmRXSmxjbTVsZEdWek1CNFhEVEkwTURreE1EQTNNall3TWxvWERUSTFNRGt4TURBMwpNall3TWxvd0VURVBNQTBHQTFVRUF4TUdaR1YyYjNCek1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBCk1JSUJDZ0tDQVFFQXhrcEEyakpka24wU3RsT3g1R2o2YThORVlyc0M5Nzl2c05WdmFHMkQwbG5tK0NCRU5ISjQKcGxIQ2w2R1Y5R2FIcTdPWWkwVDhtT0FHOSs5cEZtSDBGellsOWNiWXo0TmZORUxwUkMwNnRpSWc4THZCdWZheApRWFhTQis2VG9aVVlmblg1MFJKY21iajBNN2FNQnRXUzE5SUpTb1laS1R1b0Q2b0o0dmxZVFBlMWowdHZoc29xCnoyT0FNMWFpYldyRSs2ZklyRUhHYXUxZ1ZMTXVsTXRIR0ZBYUVabFpFVGt1LzhQK1lCaU96Q003emMrL3V3dWUKQ3VsUzY3ZXlVSVpzM0dnendxTXU3QWU3UHZTWmxqN0d0L3BtdlpnaHhYL2lsRnVsenRxK1BQWVc4dWc1YUNCbAp1YUxNS2gzZU5uZUtyRHhpZytoSk9GdXp5Nk5ISi9kenN3SURBUUFCbzFZd1ZEQU9CZ05WSFE4QkFmOEVCQU1DCkJhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQWZCZ05WSFNNRUdEQVcKZ0JRejc4YkswM0h0WmhESW1tU09zbWRCVTB3a1N6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFsMThlQXQvbQo3WHptZjZ0TlVGNDFjVkxtTmFPVk5MMnhDL0lKb3hoNEtCS1Zyc2FNYzlhUXBRbkFUb2JqNzVUQ0VnZTRkZVZiClhMM2NMeC9QUWY2U1lSamowa25BK3N0K0FyOFhrcmt2SUxCR1hEQ3NOL2hoc05MZHdGaUF4S09DRDkxTWFLa0sKZ3F0S3RjTVA1RWtoa3EvZ09BRkhQd3Z1NEdWWkpZL1NaaExxTWFkNHdmSFB6Z0FsSXREcTArZmI4Z3FHYzVkQgpwWnM4ZzJiNDdDa3ZVNWJLYjZNY1dra2hMTzdCa2E1V1pVM1hUTnVWbTQxdmRnclk1SWRsNHdDQU1RL1BQU2ZaCkVicDJZRUM4Z2l5czRPS3lxd01UUGdLNVFYb1RyTGRlV2U2TmEzZ1VsRlR1VnZYcXZuN0V5dStncmhpMENTZTAKbEdSdDJTZGNGRjRhdUE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==" | base64 -d > devops.crt
+kubectl --kubeconfig config-devops config set-cluster prod-cluster --server=https://192.168.1.100:6443 --insecure-skip-tls-verify=true
+vi config-devops 
+kubectl --kubeconfig config-devops config set-credentials devops --client-certificate devops.crt --client-key devops.key --embed-certs=true
+vi config-devops 
+kubectl --kubeconfig config-devops config set-context default --cluster prod-cluster --user devops
+vi config-devops 
+kubectl --kubeconfig config-devops config use-context default
+vi config-devops 
+kubectl create ns app1
+kubectl get ns
+kubectl create role devops-role --help
+kubectl get nodes worker01
+kubectl get nodes
+kubectl get nodes -w
+kubectl -n app1 create rolebinding devops-rolebinding --help
+kubectl -n app1 create rolebinding devops-rolebinding --role devops-role --user=devops
+kubectl describe role -n app1 devops-role 
+kubectl describe rolebindings.rbac.authorization.k8s.io -n app1 devops-rolebinding 
+sudo -i
+kubectl edit role -n app1 devops-role 
+kubectl describe role -n app1 devops-role 
+sudo -i
+kubectl create serviceaccount api-user
+kubectl get clusterrole
+kubectl create clusterrolebinding api-user-binding --clusterrole admin --serviceaccount=default:api-user
+kubectl describe clusterrolebindings.rbac.authorization.k8s.io api-user-binding 
+kubectl create token api-user 
+export TOKEN="eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2dzdYanR3VjdKUzlpcGc0R2tpRkpvaW5kQVV1aGVzZVRZNU9fR0RiMWMifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzI1OTU4NzQwLCJpYXQiOjE3MjU5NTUxNDAsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiZDA0MzM1YTItOThmZi00M2U1LTk0ODgtOWFjNjk4NjMyM2ZkIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImFwaS11c2VyIiwidWlkIjoiZGViNzgyMjAtMjI5OC00MjM5LWJiYjgtN2M3M2E1NWIwNDJlIn19LCJuYmYiOjE3MjU5NTUxNDAsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmFwaS11c2VyIn0.IwbDViuN_td7VAA6NI7dzN5WCXmqDP3sSOXn9IKG0fgBMVlyRbntFBTQWY2n-Wd6aCABXZdCHGJp8ks2seKtREaw5My5CEemyyZTeK3yeHKWBPA9e7st5Ab856tjTh-852okutO40QtEiN5UU0AQujBlD1aH8qJMowt39uhD6W_t4EfMAmhQsUD2SGZtBt2_mSYJg-lod8nvtiWcCyjFvyOvLk6iHAkJx-Lc5Gi5goffll-XHxA3ScMECFnPZlcGBrqT2QXVU1qiTeq8QuNuTeqASnFXYdwTt_wOVV_nmyvAFyxnfw67RYkaba8DW28ulDDDpyIMLbZuZ651X9WaYg"
+echo $TOKEN 
+curl -k -H "Authorization: Bearer $TOKEN" -X GET https://k8s-master:6443/api/v1/namespaces/default/pods
+curl -k -H "Authorization: Bearer $TOKEN" -X GET https://k8s-master:6443/api/v1/namespaces/default/pods | jq -r '.items[].metadata.name'
+kubectl get pods
+kubectl api-resources 
+vi user-request-devops.yaml 
+kubectl api-resources | grep certifi
+kubectl run test-pod --image nginx
+kubectl get pods
+kubectl run test-pod2 --image httpd --labels app=httpd -o yaml --dry-run=client 
+vi nginx-pod.yaml
+kubectl run test-pod2 --image httpd --labels app=httpd -o yaml --dry-run=client > test-pod2.yaml
+vi test-pod2.yaml
+vi nginx-pod.yaml 
+kubectl get pods
+kubectl apply -f test-pod2.yaml 
+kubectl apply -f test-pod2.yaml -f nginx-pod.yaml 
+kubectl get pods
+kubectl get pods --all-namespaces 
+kubectl get pods --show-labels 
+kubectl get pods --selector run
+kubectl get pods --selector app=web
+kubectl get pods nginx-pod 
+kubectl get pods nginx-pod -o yaml
+kubectl get pods nginx-pod -o json
+kubectl get pods -o wide
+kubectl get pods -o wide --sort-by .spec.nodeName
+kubectl get pods -o wide --sort-by .metadata.name
+kubectl describe pod pod1
+kubectl get pods
+kubectl exec --help
+kubectl exec -it nginx-pod -- ls -la /
+kubectl exec -it nginx-pod -- hostname
+kubectl exec -it nginx-pod -- bash
+kubectl get pods -o wide --sort-by .spec.nodeName
+ls -la
+kubectl delete -f nginx-pod.yaml 
+kubectl get pods
+kubectl delete pod pod1
+kubectl logs test-pod
+vi sidecar-pod.yaml
+kubectl run test-busybox-pod --image busybox 
+kubectl get pods
+vi sidecar-pod.yaml
+tail -f /var/log/auth.log
+vi sidecar-pod.yaml
+kubectl apply -f sidecar-pod.yaml
+kubectl get pods
+kubectl delete pod test-busybox-pod
+kubectl exec -it sidecar-pod 
+kubectl exec -it sidecar-pod -- sh
+kubectl exec -it sidecar-pod -c sidecar -- sh
+kubectl logs sidecar-pod 
+kubectl logs sidecar-pod -c sidecar
+kubectl logs sidecar-pod --all-containers 
+vi init-pod.yaml
+kubectl apply -f init-pod.yaml
+watch -n1 kubectl get pods
+kubectl logs init-pod 
+kubectl delete pod init-pod 
+vi init-pod.yaml
+kubectl apply -f init-pod.yaml
+watch -n1 kubectl get pods
+kubectl logs init-pod 
+kubectl logs init-pod --all-containers 
+vi init-pod.yaml
+kubectl exec -it init-pod -c delay --sh
+kubectl exec -it init-pod -c delay -- sh
+vi init-pod.yaml
+kubectl delete pod init-pod 
+kubectl apply -f init-pod.yaml
+watch -n1 kubectl get pods
+kubectl logs init-pod --all-containers 
+vi init-web-pod.yaml
+cp nginx-pod.yaml init-web-pod.yaml
+vi init-web-pod.yaml
+kubectl apply -f init-web-pod.yaml ; watch -n1 kubectl get pods
+kubectl get pods -o wide
+kubectl delete pod my-static-pod-worker01 
+kubectl get pods -o wide
+mv /tmp/static-pod.yaml /etc/kubernetes/manifests/
+sudo mv /tmp/static-pod.yaml /etc/kubernetes/manifests/
+kubectl get pods -o wide
+kubectl replace --force -f sidecar-pod.yaml 
+kubectl get pods -o wide
+kubectl replace --force -f sidecar-pod.yaml 
+kubectl get pods -o wide
+kubectl get pods --show-
+kubectl get pods --show-labels 
+kubectl expose pod sidecar-pod --name sidecar-svc --port80 
+kubectl expose pod sidecar-pod --name sidecar-svc --port 80 
+kubectl expose pod test-pod2 --name httpd-clusterip-svc --port 80
+kubectl get svc
+kubectl get svc,ep,pod -o wide
+kubectl expose pod test-pod2 --name httpd-nodeport-svc --type NodePort --port 80
+kubectl get svc,ep,pods -o wide
+kubectl expose deployment my-deployment --name nginx-lb-svc --type LoadBalancer --port 80
+kubectl get svc,ep,pod -o wide
+kubectl edit svc nginx-lb-svc 
+kubectl get svc,ep,pod -o wide
+kubectl edit svc nginx-lb-svc 
+kubectl get svc,ep,pod -o wide
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
+kubectl get all -n metallb-system
+watch -n1 kubectl get all -n metallb-system
+kubectl api-resources 
+kubectl api-resources | grep -i metallb
+vi initial-pool.yaml
+kubectl get svc
+kubectl apply -f initial-pool.yaml
+kubectl get svc
+kubectl expose pod test-pod2 --name lb-svc --port 80 --type LoadBalancer
+kubectl get svc
+vi initial-pool.yaml
+kubectl apply -f initial-pool.yaml
+kubectl describe ipaddresspools.metallb.io initial-pool -n metallb-system 
+git status
+cd ..
+git add .
+git status
+history
+history | awk '$1 > 126' | cut -c 8- >> day2-history.txt
+git status
+git add .
+git status
+git commit -m "adding day2 files"
+git push
+kubectl get pods
+kubectl describe pod test-pod
+kubectl get node
+kubectl describe node k8s-master 
+kubectl annotate node k8s-master installedAt=09.09.2024
+kubectl describe node k8s-master 
+kubectl annotate pod init-pod podType="test web application"
+kubectl describe pod init-pod 
+kubectl annotate pod init-pod podType=development
+kubectl annotate pod init-pod podType=development --overwrite 
+kubectl describe pod init-pod 
+kubectl annotate pod init-pod podType-
+kubectl describe pod init-pod 
+kubectl edit pod init-pod 
+kubectl describe pod init-pod 
+kubectl get nodes --show-labels 
+kubectl label pod init-pod tier=frontend
+kubectl describe pod init-pod 
+kubectl label pod init-pod tier-
+kubectl label pod init-pod kubenretes.io/tier=frontend
+kubectl describe pod init-pod 
+kubectl label pod init-pod kubenretes.io/env=prod
+kubectl describe pod init-pod 
+kubectl label pod init-pod kubenretes.io/env-
+kubectl label pod init-pod kubenretes.io/tier-
+kubectl label pod init-pod kubernetes.io/env=prod
+kubectl label pod init-pod kubernetes.io/env=prod --overwrite 
+kubectl describe pod init-pod 
+kubectl edit pod init-pod 
+kubectl describe pod init-pod 
+kubectl get nodes --show-labels 
+cd day2
+vi my-replicaset.yaml
+kubectl apply -f my-replicaset.yaml
+kubectl get rs 
+kubectl get rs,pods
+kubectl get rs,pods --show-labels 
+cp my-replicaset.yaml test-replicaset.yaml
+vi test-replicaset.yaml 
+kubectl apply -f test-replicaset.yaml
+kubectl get rs,pod
+kubectl get rs,pod --show-labels 
+kubectl delete pod test-pod2
+kubectl get rs,pod --show-labels 
+kubectl delet pod test-replicaset-qrd8d
+kubectl delete pod test-replicaset-qrd8d
+kubectl get rs,pod --show-labels 
+kubectl delete pod test-replicaset-vllf5 ; kubectl get rs
+kubectl get deploy
+kubectl get deploy,rs,pods
+kubectl get all
+kubectl get pods
+vi nginx-deployment.yaml
+kubectl apply -f nginx-deployment.yaml
+kubectl get deploy
+kubectl get deploy,pod
+kubectl create deploy python-deploy --image marcinkujawski/python-app:1.0 -o yaml --dry-run=client
+kubectl create deploy python-deploy --image marcinkujawski/python-app:1.0 -o yaml --dry-run=client > python-deploy.yaml
+vi python-deploy.yaml
+kubectl apply -f python-deploy.yaml
+kubectl scale rs test-replicaset --replicas 7
+kubectl get rs
+kubectl get rs,pos
+kubectl get rs,pod
+kubectl scale rs test-replicaset --replicas 1
+kubectl get rs,pod
+kubectl scale deployment python-deploy --replicas=2
+kubectl get rs,pod
+kubectl edit deployments.apps python-deploy 
+kubectl get rs,pod
+kubectl describe pod python-deploy-79b75bf694-
+kubectl describe deployments.apps python-deploy 
+kubectl get deploy
+kubectl describe deploy nginx-deployment 
+vi nginx-deployment.yaml 
+kubectl replace -f nginx-deployment.yaml
+kubectl describe deploy nginx-deployment 
+kubectl set image deploy nginx-deployment web=nginx:1.16.1
+watch -n1 kubectl get deploy,pod
+kubectl describe deployments.apps nginx-deployment 
+kubectl rollout status deployment nginx-deployment 
+kubectl rollout history deployment nginx-deployment
+kubectl annotate deployment nginx-deployment kubernetes.io/change-cause="updated version nginx from 1.14.2 to 1.16.1, implementation date 10.09.2024, implementer: Admin, change no. CH12345"
+kubectl rollout history deployment nginx-deployment
+kubectl describe deployments.apps nginx-deployment 
+kubectl set image deploy nginx-deployment web=nginx:1.19.1 --record
+kubectl rollout status deployment nginx-deployment 
+kubectl rollout history deployment nginx-deployment
+kubectl edit deployments.apps nginx-deployment 
+kubectl rollout status deployment nginx-deployment 
+watch -n1 kubectl get pods
+kubectl rollout history deployment nginx-deployment
+kubectl get deploy
+kubectl rollout undo deployment nginx-deployment --revision=3
+kubectl rollout undo deployment nginx-deployment --to-revision=3
+kubectl rollout status deployment nginx-deployment 
+kubectl rollout history deployment nginx-deployment
+kubectl get pods
+kubectl describe deploy nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl describe deploy nginx-deployment 
+kubectl set image deploy nginx-deployment web=nginx:1.19.1 
+kubectl get pods
+git status
+cd ..
+history | awk '$1 > 126' | cut -c 8- >> day2-history.txt

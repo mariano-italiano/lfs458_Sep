@@ -1,0 +1,102 @@
+kubectl get nodes
+kubectl get daemonsets.apps 
+kubectl get ds -A
+kubectl get ds,pod -A
+kubectl get ds,pod -A -o wide
+kubectl get ds,pod -A -o wide | grep cilium-envoy
+cd lfs458_Sep/
+mkdir day3
+cd day
+cd day3
+vi my-deamonset.yaml
+kubectl apply -f my-deamonset.yaml
+kubectl get ds,pod -o wide
+kubectl get node k8s-master 
+kubectl describe  node k8s-master 
+vi my-deamonset.yaml
+kubectl replace -f my-deamonset.yaml 
+kubectl get node k8s-master 
+kubectl get ds,pod -o wide
+kubectl scale ds --help
+vi nginx-stfs.yaml
+kubectl apply -f nginx-stfs.yaml
+vi nginx-stfs.yaml 
+kubectl get sts
+kubectl describe sts nginx-stfs  
+kubectl get pods
+kubectl scale statefulset nginx-stfs --replicas 8
+watch -n1 kubectl get pods
+kubectl scale statefulset nginx-stfs --replicas 1
+watch -n1 kubectl get pods
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+watch -n1 kubectl get all -n ingress-nginx
+kubectl create deployment cars --image nginx 
+kubectl create deployment flowers --image nginx
+kubectl get deployments.apps 
+kubectl expose deployment cars --name car-svc --port 80
+kubectl expose deployment flowers --name flowers-svc --port 80
+kubectl get svc
+vi cars-index.html
+vi flowers-index.html
+kubectl get pods
+kubectl cp cars-index.html cars-6985f6dbf7-kgzk5:/usr/share/nginx/html/index.html
+kubectl cp flowers-index.html flowers-5646c88966-vbrjs:/usr/share/nginx/html/index.html
+vi cars-index.html 
+kubectl cp cars-index.html cars-6985f6dbf7-kgzk5:/usr/share/nginx/html/index.html
+vi flowers-index.html 
+kubectl cp flowers-index.html flowers-5646c88966-vbrjs:/usr/share/nginx/html/index.html
+vi flowers-index.html 
+kubectl cp flowers-index.html flowers-5646c88966-vbrjs:/usr/share/nginx/html/index.html
+vi flowers-index.html 
+kubectl cp flowers-index.html flowers-5646c88966-vbrjs:/usr/share/nginx/html/index.html
+watch -n1 kubectl get all -n ingress-nginx
+kubectl edit svc -n ingress-nginx ingress-nginx-controller
+watch -n1 kubectl get all -n ingress-nginx
+vi web-ingress.yaml
+kubectl get ingressclasses.networking.k8s.io 
+vi web-ingress.yaml
+kubectl apply -f web-ingress.yaml
+kubectl describe ingress web-ingress 
+vi web-ingress.yaml 
+kubectl get svc
+vi web-ingress.yaml 
+kubectl apply -f web-ingress.yaml
+kubectl describe ingress web-ingress 
+kubectl get svc
+vi web-ingress.yaml 
+kubectl apply -f web-ingress.yaml
+kubectl describe ingress web-ingress 
+vi web-ingress.yaml 
+kubectl apply -f web-ingress.yaml
+kubectl describe ingress web-ingress 
+vi web-ingress.yaml 
+kubectl apply -f web-ingress.yaml
+kubectl describe ingress web-ingress 
+vi web-ingress.yaml 
+kubectl apply -f web-ingress.yaml
+kubectl describe ingress web-ingress 
+kubectl delete ingress web-ingress 
+kubectl get svc
+kubectl delete svc nginx-lb-svc lb-svc 
+kubectl apply -f web-ingress.yaml 
+kubectl describe ingress web-ingress 
+vi web-ingress.yaml 
+kubectl apply -f web-ingress.yaml 
+kubectl describe ingress web-ingress 
+kubectl exec -it cars-6985f6dbf7-kgzk5 -- bash
+vi volume-pod.yaml
+kubectl apply -f volume-pod.yaml
+kubectl get pod -o wide
+kubectl exec -it volume-pod -- bash
+kubectl delete pod volume-pod l
+kubectl apply -f volume-pod.yaml
+kubectl get pod -o wide
+kubectl exec -it volume-pod -- bash
+vi volume-pod.yaml 
+kubectl delete pod volume-pod 
+kubectl apply -f volume-pod.yaml
+kubectl get pod -o wide
+kubectl exec -it volume-pod -- bash
+vi volume-pod.yaml 
+history
+history | awk '$1 > 423' | cut -c 8- >> ../day3-history.txt

@@ -1,0 +1,4 @@
+EnvVar1=10
+EnvVar2=some text
+# here will be the verision of my app
+EnvVer=1.0

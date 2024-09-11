@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-class-pvc
+spec:
+  storageClassName: "example-nfs"
+  resources:
+    requests:
+      storage: 50Mi
+  accessModes:
+  - ReadWriteMany

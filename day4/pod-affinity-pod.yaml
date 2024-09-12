@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-affinity-pod
+spec:
+  affinity:
+#    podAffinity:
+#      requiredDuringSchedulingIgnoredDuringExecution:
+#      - labelSelector:
+#          matchExpressions:
+#          - key: kubernetes.io/zone
+#            operator: In
+#            values:
+#            - emea
+#        topologyKey: kubernetes.io/country
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: kubernetes.io/zone
+              operator: In
+              values:
+              - emea
+          topologyKey: kubernetes.io/country
+  containers:
+  - name: with-pod-affinity
+    image: registry.k8s.io/pause:2.0
